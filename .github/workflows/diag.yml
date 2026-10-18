@@ -1,0 +1,15 @@
+name: 临时诊断
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  diag:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: 探测
+        env:
+          WB_ACCESS_TOKEN: ${{ secrets.WB_ACCESS_TOKEN }}
+        run: python3 diag_actions.py
